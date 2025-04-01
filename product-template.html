@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{product.name}} - Product Catalog</title>
+    <title>{{ product.name|e }} - Product Catalog</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .product-image {
@@ -14,6 +14,7 @@
             text-decoration: none;
             color: inherit;
             transition: color 0.2s;
+            word-break: break-all;
         }
         .source-link:hover {
             color: #0d6efd;
@@ -30,25 +31,25 @@
     <div class="container py-5">
         <div class="row">
             <div class="col-md-6">
-                <img src="{{product.imageUrl}}" class="img-fluid product-image" alt="{{product.name}}">
+                <img src="{{ product.imageUrl|e }}" class="img-fluid product-image" alt="{{ product.name|e }}">
             </div>
             <div class="col-md-6">
-                <h1 class="mb-4">{{product.name}}</h1>
+                <h1 class="mb-4">{{ product.name|e }}</h1>
                 <div class="mb-4">
-                    <a href="{{product.productLink}}" class="btn btn-primary" target="_blank">Visit Product Page</a>
+                    <a href="{{ product.productLink|e }}" class="btn btn-primary" target="_blank" rel="noopener">Visit Product Page</a>
                 </div>
                 <div class="mt-4">
                     <h3>Sources</h3>
                     <ul class="list-unstyled">
                         <li class="mb-2">
                             <strong>Primary Source:</strong>
-                            <a href="{{product.primarySource}}" class="source-link" target="_blank">{{product.primarySource}}</a>
+                            <a href="{{ product.primarySource|e }}" class="source-link" target="_blank" rel="noopener">{{ product.primarySource|e }}</a>
                         </li>
-                        {{#each product.secondarySources}}
+                        {% for source in product.secondarySources %}
                         <li class="mb-2">
-                            <a href="{{this}}" class="source-link" target="_blank">{{this}}</a>
+                            <a href="{{ source|e }}" class="source-link" target="_blank" rel="noopener">{{ source|e }}</a>
                         </li>
-                        {{/each}}
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
